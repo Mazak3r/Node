@@ -17,7 +17,7 @@ Docker Hub repository and image tag:
 
 Screenshot of the Docker container running:
 
-![Docker Container](docker_container.png)
+![Docker Container](docker_running.png)
 
 ## 4. Live Application
 
