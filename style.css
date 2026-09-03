@@ -1,0 +1,173 @@
+:root {
+  --bg: #211e1b;
+  --vignette: #171513;
+  --body-panel: #2a2621;
+  --body-edge: #17140f;
+  --display-bg: #b7c4a3;
+  --display-bg-dim: #a9b795;
+  --display-ink: #24291f;
+  --key-light: #ede7dc;
+  --key-light-active: #d9d1c1;
+  --key-dark: #3a352e;
+  --key-dark-active: #4a443b;
+  --key-accent: #c98a2c;
+  --key-accent-active: #e4a542;
+  --text-on-dark: #ede7dc;
+  --text-ink: #24291f;
+  --focus-ring: #e4a542;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  background:
+    radial-gradient(ellipse at 50% 30%, var(--bg) 0%, var(--vignette) 75%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  background: var(--body-panel);
+  border-radius: 20px;
+  padding: 22px 18px 24px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.6),
+    0 0 0 1px var(--body-edge);
+}
+
+.screen {
+  background: linear-gradient(180deg, var(--display-bg) 0%, var(--display-bg-dim) 100%);
+  border-radius: 10px;
+  padding: 18px 16px 14px;
+  margin-bottom: 18px;
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.screen-history {
+  color: var(--display-ink);
+  opacity: 0.55;
+  font-size: 0.85rem;
+  text-align: right;
+  min-height: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.screen-display {
+  color: var(--display-ink);
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: right;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 0;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--key-light);
+  color: var(--text-ink);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.06s ease, box-shadow 0.06s ease, background-color 0.1s ease;
+}
+
+.key:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow:
+    0 0 0 rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.key:hover {
+  background: var(--key-light-active);
+}
+
+.key--func {
+  background: var(--key-dark);
+  color: var(--text-on-dark);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.key--func:hover {
+  background: var(--key-dark-active);
+}
+
+.key--op {
+  background: var(--key-accent);
+  color: var(--text-ink);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.key--op:hover {
+  background: var(--key-accent-active);
+}
+
+.key--op.active {
+  background: var(--key-accent-active);
+  box-shadow:
+    0 0 0 2px var(--key-light) inset,
+    0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.key--zero {
+  grid-column: span 2;
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .screen-display {
+    font-size: 2rem;
+  }
+}
